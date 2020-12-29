@@ -43,7 +43,7 @@ Consider a classic question such as: 'what is 5 summed up with 7'. The answer mi
 
 What do we care about when answering a question? - The answer must be correct and fast. And the common grading systems account for these. However, when trying to learn something, the way you reach the answer is as important, if not more important, than the answer itself.
 
-There are two types of questions? Questions to which you can know the answer with a fair use of energytime (from a few seconds up to a few hours), and questions which are unanswerable regardless of the energy spent on them or which require tremendous amounts of energytime (thousands of hours and beyond).
+There are two types of questions? Questions to which you can know the answer with a fair use of energytime (from a few seconds up to a few hours), and questions which are unanswerable regardless of the energytime spent on them or which require tremendous amounts of energytime (thousands of hours and beyond).
 
 
 
