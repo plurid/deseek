@@ -1,0 +1,13 @@
+import base from https://raw.githubusercontent.com/plurid/joiner/master/packages/joiner-data/values/base.deon
+
+
+
+{
+    ...#base
+    #packages
+}
+
+
+packages [
+    ./packages/deseek-server
+]
