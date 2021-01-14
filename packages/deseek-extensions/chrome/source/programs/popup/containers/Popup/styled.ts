@@ -10,7 +10,7 @@ export const StyledPopup: any = styled.div`
         return props.theme.colorPrimary;
     }};
 
-    height: 120px;
+    height: 250px;
     width: 300px;
     text-align: left;
     user-select: none;
@@ -35,11 +35,28 @@ export const StyledPopupContainer: any = styled.div`
 export const StyledPopupContainerItemsView: any = styled.div`
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 60px 60px;
+    grid-template-rows: 60px 130px 60px;
     align-items: center;
 `;
 
 
 export const StyledViewOptionsButton: any = styled.div`
+    text-align: center;
+`;
+
+
+export const StyledDeseekID: any = styled.div`
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 30px 60px;
+    align-items: center;
+`;
+
+
+export const StyledActiveDeseeking: any = styled.div`
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 30px 30px 60px;
+    align-items: center;
     text-align: center;
 `;
