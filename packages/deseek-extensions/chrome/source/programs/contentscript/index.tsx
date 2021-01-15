@@ -3,6 +3,8 @@
     import React from 'react';
 
     import ReactDOM from 'react-dom';
+
+    import * as rrweb from 'rrweb';
     // #endregion libraries
 
 
@@ -52,6 +54,18 @@ async function contentscript() {
             <RecordingFrame />,
             document.getElementById(deseekFrameID) as HTMLElement,
         );
+
+        // start recording at focus,
+
+        // stop at defocus and send as message to background
+
+        // const recorded: any[] = [];
+
+        // rrweb.record({
+        //     emit: (event) => {
+        //         recorded.push(event);
+        //     },
+        // });
     } catch (error) {
         return;
     }
