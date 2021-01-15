@@ -41,6 +41,7 @@
         "react-redux": "^7.2.2",
         "redux": "^4.0.5",
         "redux-thunk": "^2.3.0",
+        "rrweb": "^0.9.13",
         "styled-components": "^5.2.1"
     },
     "devDependencies": {
