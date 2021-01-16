@@ -64,7 +64,7 @@ The browser extension will resolve a domain by `POST`ing to `<domain>/deseek` th
 
 ``` json
 {
-    "request": "api"
+    "request": "api/graphql"
 }
 ```
 
