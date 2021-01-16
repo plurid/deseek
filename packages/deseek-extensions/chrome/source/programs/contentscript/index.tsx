@@ -27,7 +27,8 @@
 
 
 // #region module
-let chromeRuntimePort = chrome.runtime.connect();
+// let chromeRuntimePort = chrome.runtime.connect();
+// console.log('chromeRuntimePort', chromeRuntimePort);
 
 let stopRecord: () => void | null;
 let recordedEvents: any[] = [];
@@ -40,6 +41,8 @@ const startRecording = async (
         return;
     }
 
+    console.log('startRecording');
+
     stopRecord = rrweb.record({
         emit: (event) => {
             recordedEvents.push(event);
@@ -51,13 +54,15 @@ chrome.runtime.onMessage.addListener(startRecording);
 
 
 const stopRecording = () => {
-    if (!chromeRuntimePort) {
-        return;
-    }
+    // if (!chromeRuntimePort) {
+    //     return;
+    // }
 
     if (!stopRecord) {
         return;
     }
+
+    console.log('stopRecord');
 
     stopRecord();
 
@@ -111,8 +116,8 @@ async function contentscriptMain() {
 
 contentscriptMain();
 
-chromeRuntimePort.onDisconnect.addListener(() => {
-    chromeRuntimePort = null;
-    window.removeEventListener('blur', stopRecording);
-});
+// chromeRuntimePort.onDisconnect.addListener(() => {
+//     chromeRuntimePort = null;
+//     window.removeEventListener('blur', stopRecording);
+// });
 // #endregion module

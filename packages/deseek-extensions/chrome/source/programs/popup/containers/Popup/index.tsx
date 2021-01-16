@@ -108,16 +108,16 @@ const Popup: React.FC<any> = (
         });
     }
 
-    const finishDeseek = () => {
+    const stopEditDeseek = () => {
         updateActiveDeseeking('');
+
+        chrome.runtime.sendMessage({
+            type: 'STOP',
+        });
 
         chrome.tabs.create({
             url: chrome.runtime.getURL('editor.html'),
         });
-
-        // chrome.runtime.sendMessage({
-        //     type: 'FINISH',
-        // });
     }
     // #endregion handlers
 
@@ -208,8 +208,8 @@ const Popup: React.FC<any> = (
                                     />
 
                                     <PluridPureButton
-                                        text="finish"
-                                        atClick={() => finishDeseek()}
+                                        text="edit"
+                                        atClick={() => stopEditDeseek()}
                                         level={2}
                                         style={{
                                             minWidth: 'auto',

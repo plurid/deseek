@@ -69,25 +69,49 @@ const onMessage = async (
         } = message;
 
         switch (type) {
+            case 'INITIALIZE':
+                console.log('INITIALIZE');
+                recorder = new Recorder();
+                break;
             case 'RECORDING':
                 if (!recorder) {
                     return;
                 }
+                console.log('RECORDING', data);
                 recorder.record({
+                    id: Math.random() + '',
                     focusedAt: Date.now(),
-                    url: '',
+                    url: Math.random() + '',
                     data,
                 });
                 break;
-            case 'INITIALIZE':
-                recorder = new Recorder();
-                break;
-            case 'FOCUS':
-                if (!recorder) {
-                    return;
+            case 'STOP':
+                {
+                    if (!recorder) {
+                        return;
+                    }
+                    const recorded = recorder.extract();
+                    console.log('STOP', recorded);
+                    break;
                 }
-                recorder.record(data);
-                break;
+            case 'EXTRACT':
+                {
+                    if (!recorder) {
+                        return;
+                    }
+                    const recorded = recorder.extract();
+                    console.log('EXTRACT', recorded);
+                    const tabID = sender.tab?.id;
+                    console.log('EXTRACT tabID', tabID);
+
+                    chrome.tabs.sendMessage(
+                        tabID,
+                        {
+                            recorded,
+                        },
+                    );
+                    break;
+                }
             case 'FINISH':
                 {
                     if (!recorder) {
@@ -95,6 +119,7 @@ const onMessage = async (
                     }
                     recorder.end();
                     const recorded = recorder.extract();
+                    console.log('FINISH', recorded);
                     uploadRecorded(recorded);
                     recorder = null;
                     break;

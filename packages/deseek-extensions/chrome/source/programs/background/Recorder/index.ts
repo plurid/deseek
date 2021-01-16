@@ -1,5 +1,6 @@
 // #region module
 export interface Record {
+    id: string;
     focusedAt: number;
     url: string;
     data: any;
@@ -32,14 +33,14 @@ class Recorder {
     }
 
     public extract() {
-        if (!this.ended()) {
-            return;
-        }
+        const end = this.endTime > 0
+            ? this.endTime
+            : Date.now();
 
         const data = {
             records: this.records,
             start: this.startTime,
-            end: this.endTime,
+            end,
         };
 
         return data;
