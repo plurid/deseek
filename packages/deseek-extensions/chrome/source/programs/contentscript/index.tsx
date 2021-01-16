@@ -27,6 +27,8 @@
 
 
 // #region module
+let chromeRuntimePort = chrome.runtime.connect();
+
 let stopRecord: () => void | null;
 let recordedEvents: any[] = [];
 
@@ -48,7 +50,11 @@ const startRecording = async (
 chrome.runtime.onMessage.addListener(startRecording);
 
 
-window.addEventListener('blur', () => {
+const stopRecording = () => {
+    if (!chromeRuntimePort) {
+        return;
+    }
+
     if (!stopRecord) {
         return;
     }
@@ -60,7 +66,9 @@ window.addEventListener('blur', () => {
         data: recordedEvents,
     });
     recordedEvents = [];
-});
+}
+
+window.addEventListener('blur', stopRecording);
 
 
 async function contentscript() {
@@ -102,4 +110,9 @@ async function contentscriptMain() {
 
 
 contentscriptMain();
+
+chromeRuntimePort.onDisconnect.addListener(() => {
+    chromeRuntimePort = null;
+    window.removeEventListener('blur', stopRecording);
+});
 // #endregion module
