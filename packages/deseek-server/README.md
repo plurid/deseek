@@ -30,6 +30,7 @@
 ### Contents
 
 + [About](#about)
++ [Usage](#usage)
 + [Packages](#packages)
 + [Codeophon](#codeophon)
 
@@ -44,6 +45,38 @@ Consider a classic question such as: 'what is 5 summed up with 7'. The answer mi
 What do we care about when answering a question? - The answer must be correct and fast. And the common grading systems account for these. However, when trying to learn something, the way you reach the answer is as important, if not more important, than the answer itself.
 
 There are two types of questions? Questions to which you can know the answer with a fair use of energytime (from a few seconds up to a few hours), and questions which are unanswerable regardless of the energytime spent on them or which require tremendous amounts of energytime (thousands of hours and beyond).
+
+
+
+## Usage
+
+Deseek is implemented for the plurid.com machine ([plurid.com/deseek](https://plurid.com/deseek)) and can be implemented on any other machine.
+
+The deseek browser extension can record deseeks using an ID. The ID has the format
+
+```
+<domain>::<value>
+```
+
+The domain can be missing, and then it is assumed to be `plurid.com`, which further resolves to `api.plurid.com/graphql`.
+
+The browser extension will resolve a domain by `POST`ing to `<domain>/deseek` the following request
+
+``` json
+{
+    "request": "api"
+}
+```
+
+and expects the response
+
+``` json
+{
+    "api": "path/to/graphql/endpoint"
+}
+```
+
+The extension will then communicate with the endpoint, uploading the record.
 
 
 
