@@ -45,10 +45,16 @@ const Editor: React.FC<EditorProperties> = (
             return;
         }
 
+        if (events.length < 2) {
+            return;
+        }
+
         new rrweb.Replayer(events as any, {
             root: replayer.current,
         });
-    }, []);
+    }, [
+        events,
+    ]);
     // #endregion effects
 
 
