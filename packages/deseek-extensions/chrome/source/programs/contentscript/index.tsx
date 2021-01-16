@@ -85,7 +85,7 @@ async function contentscript() {
             options,
         } = await chromeStorage.get('options');
 
-        if (!extensionOn) {
+        if (!extensionOn || !activeDeseeking) {
             return;
         }
 

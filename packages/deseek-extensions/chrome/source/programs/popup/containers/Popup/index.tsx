@@ -111,6 +111,8 @@ const Popup: React.FC<any> = (
     const finishDeseek = () => {
         updateActiveDeseeking('');
 
+        // open the editor
+
         chrome.runtime.sendMessage({
             type: 'FINISH',
         });
