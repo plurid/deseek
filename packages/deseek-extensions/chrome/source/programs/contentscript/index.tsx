@@ -27,6 +27,40 @@
 
 
 // #region module
+let stopRecord: () => void | null;
+let recordedEvents: any[] = [];
+
+
+const startRecording = async (
+    message: any,
+) => {
+    if (message.type !== 'START_RECORD') {
+        return;
+    }
+
+    stopRecord = rrweb.record({
+        emit: (event) => {
+            recordedEvents.push(event);
+        },
+    });
+}
+
+chrome.runtime.onMessage.addListener(startRecording);
+
+
+window.addEventListener('blur', () => {
+    if (stopRecord) {
+        stopRecord();
+    }
+
+    chrome.runtime.sendMessage({
+        type: 'RECORDING',
+        data: recordedEvents,
+    });
+    recordedEvents = [];
+});
+
+
 async function contentscript() {
     try {
         const {
@@ -54,18 +88,6 @@ async function contentscript() {
             <RecordingFrame />,
             document.getElementById(deseekFrameID) as HTMLElement,
         );
-
-        // start recording at focus,
-
-        // stop at defocus and send as message to background
-
-        // const recorded: any[] = [];
-
-        // rrweb.record({
-        //     emit: (event) => {
-        //         recorded.push(event);
-        //     },
-        // });
     } catch (error) {
         return;
     }
