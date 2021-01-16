@@ -111,11 +111,13 @@ const Popup: React.FC<any> = (
     const finishDeseek = () => {
         updateActiveDeseeking('');
 
-        // open the editor
-
-        chrome.runtime.sendMessage({
-            type: 'FINISH',
+        chrome.tabs.create({
+            url: chrome.runtime.getURL('editor.html'),
         });
+
+        // chrome.runtime.sendMessage({
+        //     type: 'FINISH',
+        // });
     }
     // #endregion handlers
 
