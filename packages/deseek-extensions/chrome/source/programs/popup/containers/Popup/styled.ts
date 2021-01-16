@@ -1,7 +1,12 @@
-import styled from 'styled-components';
+// #region imports
+    // #region libraries
+    import styled from 'styled-components';
+    // #endregion libraries
+// #endregion imports
 
 
 
+// #region module
 export const StyledPopup: any = styled.div`
     background-color: ${(props: any) => {
         return props.theme.backgroundColorPrimary;
@@ -60,3 +65,4 @@ export const StyledActiveDeseeking: any = styled.div`
     align-items: center;
     text-align: center;
 `;
+// #endregion module

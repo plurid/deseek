@@ -68,8 +68,6 @@ const onMessage = async (
             data,
         } = message;
 
-        const tabID = sender.tab.id;
-
         switch (type) {
             case 'RECORDING':
                 if (!recorder) {
@@ -90,7 +88,7 @@ const onMessage = async (
                 }
                 recorder.record(data);
                 break;
-            case 'END':
+            case 'FINISH':
                 {
                     if (!recorder) {
                         return;
@@ -101,20 +99,25 @@ const onMessage = async (
                     recorder = null;
                     break;
                 }
+            case 'CANCEL':
+                recorder = null;
+                break;
 
             default:
-                const response = {
-                    status: false,
-                };
-                chrome.tabs.sendMessage(
-                    tabID,
-                    { message: { ...response } },
-                );
-                return;
+                {
+                    const tabID = sender.tab?.id;
+
+                    const response = {
+                        status: false,
+                    };
+                    chrome.tabs.sendMessage(
+                        tabID,
+                        { message: { ...response } },
+                    );
+                    return;
+                }
         }
     } catch (error) {
-        console.log('error', error);
-
         return;
     }
 }

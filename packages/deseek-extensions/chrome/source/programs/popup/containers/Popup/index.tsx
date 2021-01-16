@@ -76,21 +76,69 @@ const Popup: React.FC<any> = (
     // #endregion state
 
 
+    // #region handlers
+    const updateActiveDeseeking = async (
+        value: string,
+    ) => {
+        setActiveDeseeking(value);
+
+        await chromeStorage.set({
+            activeDeseeking: value,
+        });
+    }
+
+    const handleDeseekID = () => {
+        updateActiveDeseeking(deseekID);
+        setDeseekID('');
+
+        chrome.runtime.sendMessage({
+            type: 'INITIALIZE',
+        });
+    }
+
+    const cancelDeseek = () => {
+        updateActiveDeseeking('');
+
+        chrome.runtime.sendMessage({
+            type: 'CANCEL',
+        });
+    }
+
+    const finishDeseek = () => {
+        updateActiveDeseeking('');
+
+        chrome.runtime.sendMessage({
+            type: 'FINISH',
+        });
+    }
+    // #endregion handlers
+
+
     // #region effects
     useEffect(() => {
-        const getExtensionState = async () => {
-            const { extensionOn } = await chromeStorage.get('extensionOn');
+        const getChromeState = async () => {
+            const {
+                extensionOn,
+            } = await chromeStorage.get('extensionOn');
             setExtensionOnOff(!!extensionOn);
+
+            const {
+                activeDeseeking,
+            } = await chromeStorage.get('activeDeseeking');
+            updateActiveDeseeking(activeDeseeking || '');
         }
 
-        getExtensionState();
+        getChromeState();
     }, []);
 
     useEffect(() => {
-        const setExtensionState = async () => {
-            await chromeStorage.set({extensionOn: extensionOnOff});
+        const setChromeExtensionState = async () => {
+            await chromeStorage.set({
+                extensionOn: extensionOnOff,
+            });
         }
-        setExtensionState();
+
+        setChromeExtensionState();
     }, [
         extensionOnOff,
     ]);
@@ -125,10 +173,7 @@ const Popup: React.FC<any> = (
                                     theme={theme}
                                     text={deseekID}
                                     atChange={(event) => setDeseekID(event.target.value)}
-                                    enterAtClick={() => {
-                                        setActiveDeseeking(deseekID);
-                                        setDeseekID('');
-                                    }}
+                                    enterAtClick={() => handleDeseekID()}
                                     level={2}
                                     spellCheck={false}
                                     autoCapitalize="false"
@@ -150,14 +195,14 @@ const Popup: React.FC<any> = (
 
                                 <div>
                                     <div
-                                        onClick={() => {
-                                            setActiveDeseeking('');
-                                        }}
+                                        onClick={() => cancelDeseek()}
                                     >
                                         cancel
                                     </div>
 
-                                    <div>
+                                    <div
+                                        onClick={() => finishDeseek()}
+                                    >
                                         finish
                                     </div>
                                 </div>
