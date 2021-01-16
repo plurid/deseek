@@ -13,6 +13,10 @@ const {
     inputs: {
         Textline: PluridTextline,
     },
+    buttons: {
+        PureButton: PluridPureButton,
+        LinkButton: PluridLinkButton,
+    },
 } = universal;
 // #endregion module
 
@@ -21,5 +25,8 @@ const {
 // #region exports
 export {
     PluridTextline,
+
+    PluridPureButton,
+    PluridLinkButton,
 };
 // #endregion exports

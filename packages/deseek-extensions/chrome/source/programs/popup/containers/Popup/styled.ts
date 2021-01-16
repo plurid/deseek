@@ -40,7 +40,7 @@ export const StyledPopupContainer: any = styled.div`
 export const StyledPopupContainerItemsView: any = styled.div`
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 60px 130px 60px;
+    grid-template-rows: 60px 150px 30px;
     align-items: center;
 `;
 
@@ -64,5 +64,11 @@ export const StyledActiveDeseeking: any = styled.div`
     grid-template-rows: 30px 30px 60px;
     align-items: center;
     text-align: center;
+`;
+
+
+export const StyledDeseekButtons: any = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 `;
 // #endregion module

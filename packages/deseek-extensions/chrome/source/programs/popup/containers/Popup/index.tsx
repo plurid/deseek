@@ -21,6 +21,9 @@
 
     import {
         PluridTextline,
+
+        PluridLinkButton,
+        PluridPureButton,
     } from '../../../../services/styled';
     // #endregion external
 
@@ -33,6 +36,7 @@
         StyledViewOptionsButton,
         StyledDeseekID,
         StyledActiveDeseeking,
+        StyledDeseekButtons,
     } from './styled';
     // #endregion internal
 // #endregion imports
@@ -193,19 +197,21 @@ const Popup: React.FC<any> = (
                                     {activeDeseeking}
                                 </div>
 
-                                <div>
-                                    <div
-                                        onClick={() => cancelDeseek()}
-                                    >
-                                        cancel
-                                    </div>
+                                <StyledDeseekButtons>
+                                    <PluridLinkButton
+                                        text="cancel"
+                                        atClick={() => cancelDeseek()}
+                                    />
 
-                                    <div
-                                        onClick={() => finishDeseek()}
-                                    >
-                                        finish
-                                    </div>
-                                </div>
+                                    <PluridPureButton
+                                        text="finish"
+                                        atClick={() => finishDeseek()}
+                                        level={2}
+                                        style={{
+                                            minWidth: 'auto',
+                                        }}
+                                    />
+                                </StyledDeseekButtons>
                             </StyledActiveDeseeking>
                         )}
                     </div>
