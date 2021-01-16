@@ -16,8 +16,9 @@ const base = {
     entry: {
         background: './source/programs/background/index.ts',
         contentscript: './source/programs/contentscript/index.tsx',
-        popup: './source/programs/popup/index.tsx',
+        editor: './source/programs/editor/index.tsx',
         options: './source/programs/options/index.tsx',
+        popup: './source/programs/popup/index.tsx',
     },
     resolve: {
         extensions: [".ts", ".tsx", ".js", ".jsx"],
@@ -51,14 +52,19 @@ const base = {
             ],
         }),
         new HtmlWebpackPlugin({
-            template: './source/programs/popup/index.html',
-            chunks: ['popup'],
-            filename: 'popup.html',
+            template: './source/programs/editor/index.html',
+            chunks: ['editor'],
+            filename: 'editor.html',
         }),
         new HtmlWebpackPlugin({
             template: './source/programs/options/index.html',
             chunks: ['options'],
             filename: 'options.html',
+        }),
+        new HtmlWebpackPlugin({
+            template: './source/programs/popup/index.html',
+            chunks: ['popup'],
+            filename: 'popup.html',
         }),
         new webpack.DefinePlugin({
             'process.env': {
