@@ -2,8 +2,6 @@
     // #region libraries
     import React from 'react';
     import themes from '@plurid/plurid-themes';
-
-    import Context from './context';
     // #endregion libraries
 
 
@@ -12,6 +10,13 @@
         chromeStorage,
     } from '../../services/utilities';
     // #endregion external
+
+
+    // #region internal
+    import Context from './context';
+
+    import Editor from './containers/Editor';
+    // #endregion internal
 // #endregion imports
 
 
@@ -40,9 +45,7 @@ class App extends React.Component {
             <Context.Provider
                 value={this.state}
             >
-                <div>
-                    Editor
-                </div>
+                <Editor />
             </Context.Provider>
         );
     }
