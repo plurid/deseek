@@ -49,9 +49,11 @@ chrome.runtime.onMessage.addListener(startRecording);
 
 
 window.addEventListener('blur', () => {
-    if (stopRecord) {
-        stopRecord();
+    if (!stopRecord) {
+        return;
     }
+
+    stopRecord();
 
     chrome.runtime.sendMessage({
         type: 'RECORDING',
