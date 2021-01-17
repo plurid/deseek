@@ -1,6 +1,7 @@
 // #region imports
     // #region libraries
     import React, {
+        useContext,
         useRef,
         useEffect,
         useState,
@@ -11,6 +12,8 @@
 
 
     // #region external
+    import Context from '../../context';
+
     import {
         PluridPureButton,
     } from '../../../../services/styled';
@@ -21,6 +24,8 @@
     import {
         StyledEditor,
     } from './styled';
+
+    import Tabs from './components/Tabs';
     // #endregion internal
 // #endregion imports
 
@@ -33,6 +38,14 @@ export interface EditorProperties {
 const Editor: React.FC<EditorProperties> = (
     properties,
 ) => {
+    // #region properties
+    const context: any = useContext(Context);
+    const {
+        theme,
+    } = context;
+    // #endregion properties
+
+
     // #region references
     const replayerElement = useRef<HTMLDivElement | null>(null);
     const replayer = useRef<rrweb.Replayer | null>(null);
@@ -130,25 +143,11 @@ const Editor: React.FC<EditorProperties> = (
     // #region render
     return (
         <StyledEditor>
-            {recorded && (
-                <div>
-                    {recorded.records.map((record: any) => {
-                        const {
-                            id,
-                            url,
-                        } = record;
-
-                        return (
-                            <div
-                                key={record.id}
-                                onClick={() => selectRecord(id)}
-                            >
-                                {url}
-                            </div>
-                        );
-                    })}
-                </div>
-            )}
+            <Tabs
+                theme={theme}
+                recorded={recorded}
+                selectRecord={selectRecord}
+            />
 
             <div
                 ref={replayerElement}
