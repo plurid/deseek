@@ -46,7 +46,8 @@ export const StyledPopupContainerItemsView: any = styled.div`
 
 
 export const StyledViewOptionsButton: any = styled.div`
-    text-align: center;
+    display: grid;
+    place-content: center;
 `;
 
 

@@ -11,8 +11,6 @@
     // #region external
     import Context from '../../context';
 
-    import ButtonInline from '../../../../components/ButtonInline';
-
     import ItemExtensionOnOff from '../../../../components/ItemExtensionOnOff';
 
     import {
@@ -204,11 +202,13 @@ const Popup: React.FC<any> = (
 
                                 <StyledDeseekButtons>
                                     <PluridLinkButton
+                                        theme={theme}
                                         text="cancel"
                                         atClick={() => cancelDeseek()}
                                     />
 
                                     <PluridPureButton
+                                        theme={theme}
                                         text="edit"
                                         atClick={() => stopEditDeseek()}
                                         level={2}
@@ -222,12 +222,11 @@ const Popup: React.FC<any> = (
                     </StyledDeseeking>
 
                     <StyledViewOptionsButton>
-                        <ButtonInline
+                        <PluridLinkButton
                             theme={theme}
+                            text="view options"
                             atClick={openOptions}
-                        >
-                            view options
-                        </ButtonInline>
+                        />
                     </StyledViewOptionsButton>
                 </StyledPopupContainerItemsView>
             </StyledPopupContainer>
