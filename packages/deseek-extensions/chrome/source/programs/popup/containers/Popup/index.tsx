@@ -34,6 +34,7 @@
         StyledPopupContainer,
         StyledPopupContainerItemsView,
         StyledViewOptionsButton,
+        StyledDeseeking,
         StyledDeseekID,
         StyledActiveDeseeking,
         StyledDeseekButtons,
@@ -166,7 +167,7 @@ const Popup: React.FC<any> = (
                         setExtensionOnOff={() => setExtensionOnOff(!extensionOnOff)}
                     />
 
-                    <div>
+                    <StyledDeseeking>
                         {extensionOnOff && !activeDeseeking && (
                             <StyledDeseekID>
                                 <div
@@ -218,7 +219,7 @@ const Popup: React.FC<any> = (
                                 </StyledDeseekButtons>
                             </StyledActiveDeseeking>
                         )}
-                    </div>
+                    </StyledDeseeking>
 
                     <StyledViewOptionsButton>
                         <ButtonInline

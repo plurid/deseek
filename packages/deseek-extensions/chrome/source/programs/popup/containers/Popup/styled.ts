@@ -58,6 +58,11 @@ export const StyledDeseekID: any = styled.div`
 `;
 
 
+export const StyledDeseeking: any = styled.div`
+    padding: 0.3rem 0.7rem;
+`;
+
+
 export const StyledActiveDeseeking: any = styled.div`
     display: grid;
     grid-template-columns: 1fr;
