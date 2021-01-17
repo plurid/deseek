@@ -1,4 +1,11 @@
 // #region imports
+    // #region libraries
+    import {
+        uuid,
+    } from '@plurid/plurid-functions';
+    // #endregion libraries
+
+
     // #region external
     import {
         chromeStorage,
@@ -14,10 +21,10 @@
 
 
 // #region module
-chrome.tabs.onActivated.addListener(async (
+const startRecord = async (
     {
         tabId,
-    },
+    }: any,
 ) => {
     const {
         extensionOn,
@@ -39,12 +46,9 @@ chrome.tabs.onActivated.addListener(async (
             type: 'START_RECORD',
         },
     );
+}
 
-    // chrome.tabs.get(tabId, (data) => {
-    //     // data.url
-    //     console.log('data', data);
-    // });
-});
+chrome.tabs.onActivated.addListener(startRecord);
 
 
 
@@ -80,9 +84,11 @@ const onMessage = async (
                 console.log('RECORDING', data);
                 recorder.record({
                     id: Math.random() + '',
-                    focusedAt: Date.now(),
-                    url: Math.random() + '',
-                    data,
+                    focusedAt: data.focusedAt || 0,
+                    url: data.url || uuid.generate(),
+                    title: data.title || '',
+                    deseekFrameID: data.deseekFrameID,
+                    data: data.events,
                 });
                 break;
             case 'STOP':

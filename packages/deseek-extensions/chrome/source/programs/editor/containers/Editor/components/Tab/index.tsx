@@ -53,6 +53,7 @@ const Tab: React.FC<TabProperties> = (
     const {
         id,
         url,
+        title,
     } = data;
     // #endregion properties
 
@@ -63,7 +64,7 @@ const Tab: React.FC<TabProperties> = (
             theme={theme}
             onClick={() => selectRecord(id)}
         >
-            {url}
+            {title}
         </StyledTab>
     );
     // #endregion render

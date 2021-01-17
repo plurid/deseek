@@ -3,6 +3,8 @@ export interface Record {
     id: string;
     focusedAt: number;
     url: string;
+    title: string;
+    deseekFrameID: string;
     data: any;
 }
 

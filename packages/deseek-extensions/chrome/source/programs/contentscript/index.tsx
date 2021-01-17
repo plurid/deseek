@@ -32,6 +32,55 @@
 
 let stopRecord: () => void | null;
 let recordedEvents: any[] = [];
+let deseekFrameID: string | null;
+let focusedAt: number | null;
+
+
+async function contentscriptRender() {
+    try {
+        const {
+            extensionOn,
+        } = await chromeStorage.get('extensionOn');
+
+        const {
+            activeDeseeking,
+        } = await chromeStorage.get('activeDeseeking');
+
+        // const {
+        //     options,
+        // } = await chromeStorage.get('options');
+
+        if (!extensionOn || !activeDeseeking) {
+            return;
+        }
+
+        deseekFrameID = 'deseek-recording-frame-' + Math.floor(Math.random() * 10_000);
+        const element = document.createElement('div');
+        element.id = deseekFrameID;
+        document.body.appendChild(element);
+
+        ReactDOM.render(
+            <RecordingFrame />,
+            document.getElementById(deseekFrameID) as HTMLElement,
+        );
+    } catch (error) {
+        return;
+    }
+}
+
+
+function contentscriptDerender() {
+    if (!deseekFrameID) {
+        return;
+    }
+
+    const element = document.getElementById(deseekFrameID);
+    if (!element) {
+        return;
+    }
+    element.remove();
+}
+
 
 
 const startRecording = async (
@@ -48,6 +97,9 @@ const startRecording = async (
             recordedEvents.push(event);
         },
     });
+    focusedAt = Date.now();
+
+    contentscriptRender();
 }
 
 chrome.runtime.onMessage.addListener(startRecording);
@@ -68,53 +120,22 @@ const stopRecording = () => {
 
     chrome.runtime.sendMessage({
         type: 'RECORDING',
-        data: recordedEvents,
+        data: {
+            focusedAt,
+            url: location.href,
+            title: document.title,
+            events: recordedEvents,
+            deseekFrameID,
+        },
     });
     recordedEvents = [];
+
+    contentscriptDerender();
 }
 
 window.addEventListener('blur', stopRecording);
 
 
-async function contentscript() {
-    try {
-        const {
-            extensionOn,
-        } = await chromeStorage.get('extensionOn');
-
-        const {
-            activeDeseeking,
-        } = await chromeStorage.get('activeDeseeking');
-
-        const {
-            options,
-        } = await chromeStorage.get('options');
-
-        if (!extensionOn || !activeDeseeking) {
-            return;
-        }
-
-        const deseekFrameID = 'deseek-recording-frame-' + Math.floor(Math.random() * 1000);
-        const element = document.createElement('div');
-        element.id = deseekFrameID;
-        document.body.appendChild(element);
-
-        ReactDOM.render(
-            <RecordingFrame />,
-            document.getElementById(deseekFrameID) as HTMLElement,
-        );
-    } catch (error) {
-        return;
-    }
-}
-
-
-async function contentscriptMain() {
-    await contentscript();
-};
-
-
-contentscriptMain();
 
 // chromeRuntimePort.onDisconnect.addListener(() => {
 //     chromeRuntimePort = null;

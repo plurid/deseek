@@ -20,5 +20,6 @@ export const StyledTabs = styled.div<IStyledTabs>`
     align-items: center;
     height: 60px;
     padding: 0 0.7rem;
+    overflow: scroll;
 `;
 // #region module

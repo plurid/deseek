@@ -37,5 +37,9 @@ export const StyledTab = styled.div<IStyledTab>`
     border-radius: 20px;
     user-select: none;
     cursor: pointer;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 `;
 // #region module
