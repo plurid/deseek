@@ -17,6 +17,14 @@ export interface IStyledTabs {
 
 export const StyledTabs = styled.div<IStyledTabs>`
     display: flex;
-    height: 40px;
+    align-items: center;
+    height: 60px;
+    padding: 0 0.7rem;
+
+    background-color: ${
+        ({
+            theme,
+        }: IStyledTabs) => theme.backgroundColorSecondary
+    };
 `;
 // #region module

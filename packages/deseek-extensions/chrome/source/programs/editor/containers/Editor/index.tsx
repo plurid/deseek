@@ -142,7 +142,9 @@ const Editor: React.FC<EditorProperties> = (
 
     // #region render
     return (
-        <StyledEditor>
+        <StyledEditor
+            theme={theme}
+        >
             <Tabs
                 theme={theme}
                 recorded={recorded}
@@ -153,7 +155,12 @@ const Editor: React.FC<EditorProperties> = (
                 ref={replayerElement}
             />
 
-            <div>
+            <div
+                style={{
+                    display: 'flex',
+                    padding: '4rem',
+                }}
+            >
                 <PluridPureButton
                     text="play"
                     atClick={() => {
@@ -169,13 +176,13 @@ const Editor: React.FC<EditorProperties> = (
                     }}
                     level={2}
                 />
-            </div>
 
-            <PluridPureButton
-                text="finish"
-                atClick={() => finish()}
-                level={2}
-            />
+                <PluridPureButton
+                    text="finish"
+                    atClick={() => finish()}
+                    level={2}
+                />
+            </div>
         </StyledEditor>
     );
     // #endregion render

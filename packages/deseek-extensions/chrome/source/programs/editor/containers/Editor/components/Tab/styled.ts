@@ -19,9 +19,23 @@ export const StyledTab = styled.div<IStyledTab>`
     background-color: ${
         ({
             theme,
-        }: IStyledTab) => theme.backgroundColorSecondary
+        }: IStyledTab) => theme.backgroundColorTertiary
     };
-    height: 100%;
+    box-shadow: ${
+        ({
+            theme,
+        }: IStyledTab) => theme.boxShadowUmbra
+    };
+
+
     width: 150px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding: 0 0.7rem;
+    margin-right: 0.7rem;
+    border-radius: 20px;
+    user-select: none;
+    cursor: pointer;
 `;
 // #region module

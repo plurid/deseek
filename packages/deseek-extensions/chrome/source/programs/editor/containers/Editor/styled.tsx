@@ -1,14 +1,32 @@
 // #region imports
     // #region libraries
     import styled from 'styled-components';
+
+    import {
+        Theme,
+    } from '@plurid/plurid-themes';
     // #endregion libraries
 // #endregion imports
 
 
 
-
 // #region module
+export interface IStyledEditor {
+    theme: Theme;
+}
+
 export const StyledEditor = styled.div`
+    background-color: ${
+        ({
+            theme,
+        }: IStyledEditor) => theme.backgroundColorSecondary
+    };
+
+    display: grid;
+    place-content: center;
+    padding: 2rem;
+
+
     /* replayer */
     .replayer-wrapper {
         position: relative;
@@ -60,6 +78,11 @@ export const StyledEditor = styled.div`
             border-radius: 5px;
             transform: translate(-5px, -5px);
         }
+    }
+
+
+    iframe {
+        border: none;
     }
 `;
 // #endregion module
