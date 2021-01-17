@@ -152,36 +152,39 @@ const Editor: React.FC<EditorProperties> = (
             />
 
             <div
-                ref={replayerElement}
-            />
-
-            <div
                 style={{
-                    display: 'flex',
-                    padding: '4rem',
+                    position: 'relative',
                 }}
             >
-                <PluridPureButton
-                    text="play"
-                    atClick={() => {
-                        play();
-                    }}
-                    level={2}
+                <div
+                    ref={replayerElement}
                 />
 
-                <PluridPureButton
-                    text="pause"
-                    atClick={() => {
-                        pause();
-                    }}
-                    level={2}
-                />
+                {events.length > 2 && (
+                    <div
+                        style={{
+                            position: 'absolute',
+                            bottom: '10px',
+                            left: 0,
+                            display: 'flex',
+                            width: '100%',
+                        }}
+                    >
+                        <PluridPureButton
+                            text="play"
+                            atClick={() => {
+                                play();
+                            }}
+                            level={2}
+                        />
 
-                <PluridPureButton
-                    text="finish"
-                    atClick={() => finish()}
-                    level={2}
-                />
+                        <PluridPureButton
+                            text="finish"
+                            atClick={() => finish()}
+                            level={2}
+                        />
+                    </div>
+                )}
             </div>
         </StyledEditor>
     );

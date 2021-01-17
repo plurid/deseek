@@ -21,10 +21,29 @@ export const StyledEditor = styled.div`
             theme,
         }: IStyledEditor) => theme.backgroundColorSecondary
     };
+    background: ${
+        ({
+            theme,
+        }: IStyledEditor) => {
+            const foregroundGradient = theme.type === 'dark'
+                ? theme.backgroundColorTertiary
+                : theme.backgroundColorPrimary;
+            const backgroundGradient = theme.type === 'dark'
+                ? theme.backgroundColorPrimary
+                : theme.backgroundColorTertiary;
+
+            return `radial-gradient(
+                ellipse at center,
+                ${foregroundGradient} 0%,
+                ${backgroundGradient} 100%)
+            `;
+        }
+    };
 
     display: grid;
     place-content: center;
     padding: 2rem;
+    height: 100%;
 
 
     /* replayer */
