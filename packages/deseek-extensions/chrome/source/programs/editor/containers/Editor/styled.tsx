@@ -102,6 +102,7 @@ export const StyledEditor = styled.div`
 
     iframe {
         border: none;
+        height: 700px;
     }
 `;
 // #endregion module
