@@ -13,10 +13,6 @@
 
     // #region external
     import Context from '../../context';
-
-    import {
-        PluridPureButton,
-    } from '../../../../services/styled';
     // #endregion external
 
 
@@ -26,6 +22,7 @@
     } from './styled';
 
     import Tabs from './components/Tabs';
+    import Controls from './components/Controls';
     // #endregion internal
 // #endregion imports
 
@@ -62,6 +59,11 @@ const Editor: React.FC<EditorProperties> = (
         events,
         setEvents,
     ] = useState([]);
+
+    const [
+        playing,
+        setPlaying,
+    ] = useState(false);
     // #endregion state
 
 
@@ -78,6 +80,7 @@ const Editor: React.FC<EditorProperties> = (
         }
 
         replayer.current.play();
+        setPlaying(true);
     }
 
     const pause = () => {
@@ -86,6 +89,7 @@ const Editor: React.FC<EditorProperties> = (
         }
 
         replayer.current.pause();
+        setPlaying(false);
     }
 
     const selectRecord = (
@@ -160,31 +164,21 @@ const Editor: React.FC<EditorProperties> = (
                     ref={replayerElement}
                 />
 
-                {events.length > 2 && (
-                    <div
-                        style={{
-                            position: 'absolute',
-                            bottom: '10px',
-                            left: 0,
-                            display: 'flex',
-                            width: '100%',
-                        }}
-                    >
-                        <PluridPureButton
-                            text="play"
-                            atClick={() => {
-                                play();
-                            }}
-                            level={2}
-                        />
+                <Controls
+                // #region required
+                    // #region values
+                    theme={theme}
+                    events={events}
+                    playing={playing}
+                    // #endregion values
 
-                        <PluridPureButton
-                            text="finish"
-                            atClick={() => finish()}
-                            level={2}
-                        />
-                    </div>
-                )}
+                    // #region methods
+                    play={play}
+                    pause={pause}
+                    finish={finish}
+                    // #endregion methods
+                // #endregion required
+                />
             </div>
         </StyledEditor>
     );
