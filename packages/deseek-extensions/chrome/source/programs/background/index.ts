@@ -49,6 +49,11 @@ const startRecord = async (
 }
 
 chrome.tabs.onActivated.addListener(startRecord);
+chrome.tabs.onUpdated.addListener((tabId) => {
+    startRecord({
+        tabId,
+    });
+});
 
 
 

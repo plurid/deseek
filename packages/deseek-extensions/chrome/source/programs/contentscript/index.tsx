@@ -27,30 +27,36 @@
 
 
 // #region module
-// let chromeRuntimePort = chrome.runtime.connect();
-// console.log('chromeRuntimePort', chromeRuntimePort);
-
 let stopRecord: () => void | null;
 let recordedEvents: any[] = [];
 let deseekFrameID: string | null;
 let focusedAt: number | null;
 
 
-async function contentscriptRender() {
+
+const verifyActive = async () => {
+    const {
+        extensionOn,
+    } = await chromeStorage.get('extensionOn');
+    if (!extensionOn) {
+        return;
+    }
+
+    const {
+        activeDeseeking,
+    } = await chromeStorage.get('activeDeseeking');
+    if (!activeDeseeking) {
+        return;
+    }
+
+    return activeDeseeking;
+}
+
+
+const contentscriptRender = async () => {
     try {
-        const {
-            extensionOn,
-        } = await chromeStorage.get('extensionOn');
-
-        const {
-            activeDeseeking,
-        } = await chromeStorage.get('activeDeseeking');
-
-        // const {
-        //     options,
-        // } = await chromeStorage.get('options');
-
-        if (!extensionOn || !activeDeseeking) {
+        const activeDeseeking = await verifyActive();
+        if (!activeDeseeking) {
             return;
         }
 
@@ -69,7 +75,7 @@ async function contentscriptRender() {
 }
 
 
-function contentscriptDerender() {
+const contentscriptDerender = () => {
     if (!deseekFrameID) {
         return;
     }
@@ -90,6 +96,11 @@ const startRecording = async (
         return;
     }
 
+    const activeDeseeking = await verifyActive();
+    if (!activeDeseeking) {
+        return;
+    }
+
     console.log('startRecording');
 
     stopRecord = rrweb.record({
@@ -103,6 +114,11 @@ const startRecording = async (
 }
 
 chrome.runtime.onMessage.addListener(startRecording);
+window.addEventListener('focus', () => {
+    startRecording({
+        type: 'START_RECORD',
+    });
+});
 
 
 const stopRecording = () => {
@@ -134,11 +150,4 @@ const stopRecording = () => {
 }
 
 window.addEventListener('blur', stopRecording);
-
-
-
-// chromeRuntimePort.onDisconnect.addListener(() => {
-//     chromeRuntimePort = null;
-//     window.removeEventListener('blur', stopRecording);
-// });
 // #endregion module
