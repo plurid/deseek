@@ -35,6 +35,10 @@ let focusedAt: number | null;
 
 
 const verifyActive = async () => {
+    if (!chrome.storage.sync) {
+        return;
+    }
+
     const {
         extensionOn,
     } = await chromeStorage.get('extensionOn');
