@@ -83,6 +83,22 @@ const Editor: React.FC<EditorProperties> = (
         setPlaying(true);
     }
 
+    const getCurrentTime = () => {
+        if (!replayer.current) {
+            return;
+        }
+
+        return replayer.current.getCurrentTime();
+    }
+
+    const getMetadata = () => {
+        if (!replayer.current) {
+            return;
+        }
+
+        return replayer.current.getMetaData();
+    }
+
     const pause = () => {
         if (!replayer.current) {
             return;
@@ -118,6 +134,8 @@ const Editor: React.FC<EditorProperties> = (
             return;
         }
 
+        // replayerElement.current.innerHTML = "";
+
         replayer.current = new rrweb.Replayer(events as any, {
             root: replayerElement.current,
         });
@@ -136,7 +154,6 @@ const Editor: React.FC<EditorProperties> = (
             (
                 message,
             ) => {
-                console.log('message', message);
                 setRecorded(message.recorded);
             },
         );
@@ -175,6 +192,8 @@ const Editor: React.FC<EditorProperties> = (
                     // #region methods
                     play={play}
                     pause={pause}
+                    getCurrentTime={getCurrentTime}
+                    getMetadata={getMetadata}
                     finish={finish}
                     // #endregion methods
                 // #endregion required

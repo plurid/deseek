@@ -1,6 +1,9 @@
 // #region imports
     // #region libraries
-    import React from 'react';
+    import React, {
+        useRef,
+        useEffect,
+    } from 'react';
 
     import {
         Theme,
@@ -36,6 +39,8 @@ export interface ControlsProperties {
         // #region methods
         play: any;
         pause: any;
+        getCurrentTime: any;
+        getMetadata: any;
         finish: any;
         // #endregion methods
     // #endregion required
@@ -56,11 +61,42 @@ const Controls: React.FC<ControlsProperties> = (
             // #region methods
             play,
             pause,
+            getCurrentTime,
+            getMetadata,
             finish,
             // #endregion methods
         // #endregion required
     } = properties;
     // #endregion properties
+
+
+    // #region references
+    const interval = useRef<NodeJS.Timeout | null>(null);
+    // #endregion references
+
+
+    // #region effects
+    useEffect(() => {
+        if (!playing) {
+            return;
+        }
+
+        interval.current = setInterval(() => {
+            const time = getCurrentTime();
+            const metadata = getMetadata();
+            console.log('time', time);
+            console.log('metadata', metadata);
+        }, 1000);
+
+        return () => {
+            if (interval.current) {
+                clearInterval(interval.current);
+            }
+        }
+    }, [
+        playing,
+    ])
+    // #endregion effects
 
 
     // #region render
