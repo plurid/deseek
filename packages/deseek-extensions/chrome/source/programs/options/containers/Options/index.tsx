@@ -65,11 +65,12 @@ const {
 const extractOptions = (
     value: string,
 ) => {
+    console.log('extractOptions value', value);
     const split = value.split(/\s|\n/);
     const values = split
         .map(value =>
             value.trim()
-                .replace(/,/, 'g')
+                .replace(/,/, '')
                 .replace(/https?:\/\//, '')
         ).filter(value => value !== '');
 
@@ -105,7 +106,7 @@ const Options: React.FC<OptionsProperties> = () => {
     const [
         neverRecordOn,
         setNeverRecordOn,
-    ] = useState(options.neverRecordOn.join('\n'));
+    ] = useState(options.neverRecordOn.join(', '));
     // #endregion state
 
 
@@ -141,8 +142,10 @@ const Options: React.FC<OptionsProperties> = () => {
                 neverRecordOn,
             } = options;
 
+            const neverRecordOnData = neverRecordOn || defaultOptions.neverRecordOn;
+
             setMinimalFrame(minimalFrame ?? defaultOptions.minimalFrame);
-            setNeverRecordOn(neverRecordOn || defaultOptions.neverRecordOn);
+            setNeverRecordOn(neverRecordOnData.join(', '));
         }
 
         setOptions();
@@ -152,8 +155,12 @@ const Options: React.FC<OptionsProperties> = () => {
         const saveOptions = async () => {
             const options = {
                 minimalFrame,
-                neverRecordOn: extractOptions(neverRecordOn),
+                neverRecordOn: Array.isArray(neverRecordOn)
+                    ? neverRecordOn
+                    : extractOptions(neverRecordOn),
             };
+
+            console.log('saveOption soptions', options);
 
             await chromeStorage.set({options});
         }
@@ -165,6 +172,8 @@ const Options: React.FC<OptionsProperties> = () => {
     ]);
     // #endregion effects
 
+    console.log('options', options);
+    console.log('neverRecordOn', neverRecordOn);
 
     // #region render
     return (
@@ -197,6 +206,9 @@ const Options: React.FC<OptionsProperties> = () => {
                                 text={neverRecordOn}
                                 atChange={(event) => setNeverRecordOn(event.target.value)}
                                 // placeholder="e.g., plurid.com"
+                                style={{
+                                    whiteSpace: 'pre-wrap',
+                                }}
                             />
                         </PluridFormitem>
                     </StyledStateContainer>
