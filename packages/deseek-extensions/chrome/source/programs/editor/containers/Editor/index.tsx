@@ -115,14 +115,13 @@ const Editor: React.FC<EditorProperties> = (
     }
 
     const selectRecord = (
-        id: string,
+        index: number,
     ) => {
         if (!recorded) {
             return;
         }
 
-        const index = recorded.records.findIndex((record: any) => record.id === id);
-        const record = recorded.records.find((record: any) => record.id === id);
+        const record = recorded.records[index];
         if (!record) {
             return;
         }
@@ -180,7 +179,7 @@ const Editor: React.FC<EditorProperties> = (
                 // #region values
                 theme={theme}
                 recorded={recorded}
-                selectedTab={selectedTab}
+                selectedRecord={selectedTab}
                 // #endregion values
 
                 // #region methods
