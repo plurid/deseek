@@ -70,7 +70,7 @@ const Tabs: React.FC<TabsProperties> = (
         <StyledTabs
             theme={theme}
         >
-            {recorded.records.map((record: any) => {
+            {recorded.records.map((record: any, index: any) => {
                 const {
                     id,
                 } = record;
@@ -81,7 +81,7 @@ const Tabs: React.FC<TabsProperties> = (
                         theme={theme}
                         data={record}
                         selectRecord={selectRecord}
-                        selected={selectedTab === id}
+                        selected={selectedTab === index}
                     />
                 );
             })}
