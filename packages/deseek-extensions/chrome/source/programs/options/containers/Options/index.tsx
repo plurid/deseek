@@ -65,7 +65,6 @@ const {
 const extractOptions = (
     value: string,
 ) => {
-    console.log('extractOptions value', value);
     const split = value.split(/\s|\n/);
     const values = split
         .map(value =>
@@ -160,8 +159,6 @@ const Options: React.FC<OptionsProperties> = () => {
                     : extractOptions(neverRecordOn),
             };
 
-            console.log('saveOption soptions', options);
-
             await chromeStorage.set({options});
         }
 
@@ -172,8 +169,6 @@ const Options: React.FC<OptionsProperties> = () => {
     ]);
     // #endregion effects
 
-    console.log('options', options);
-    console.log('neverRecordOn', neverRecordOn);
 
     // #region render
     return (
