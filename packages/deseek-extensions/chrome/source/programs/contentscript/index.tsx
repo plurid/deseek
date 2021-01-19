@@ -92,7 +92,9 @@ const contentscriptRender = async () => {
         document.body.appendChild(element);
 
         ReactDOM.render(
-            <RecordingFrame />,
+            <RecordingFrame
+                minimalFrame={data.options.minimalFrame}
+            />,
             document.getElementById(deseekFrameID) as HTMLElement,
         );
     } catch (error) {

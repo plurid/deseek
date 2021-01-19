@@ -16,17 +16,29 @@
 
 // #region module
 export interface RecordingFrameProperties {
+    minimalFrame: boolean;
 }
 
 const RecordingFrame: React.FC<RecordingFrameProperties> = (
     properties,
 ) => {
+    // #region properties
+    const {
+        minimalFrame,
+    } = properties;
+    // #endregion properties
+
+
     // #region render
     return (
-        <StyledRecordingFrame>
-            <StyledRecordingText>
-                deseek recording
-            </StyledRecordingText>
+        <StyledRecordingFrame
+            minimalFrame={minimalFrame}
+        >
+            {!minimalFrame && (
+                <StyledRecordingText>
+                    deseek recording
+                </StyledRecordingText>
+            )}
         </StyledRecordingFrame>
     );
     // #endregion render

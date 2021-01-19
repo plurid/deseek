@@ -7,9 +7,18 @@
 
 
 // #region module
-export const StyledRecordingFrame = styled.div`
+export interface IStyledRecordingFrame {
+    minimalFrame: boolean;
+}
+
+export const StyledRecordingFrame = styled.div<IStyledRecordingFrame>`
+    border: ${
+        ({
+            minimalFrame,
+        }) => minimalFrame ? '0.2rem': '1.1rem'
+    } solid red;
+
     position: fixed;
-    border: 1rem solid red;
     top: 0;
     left: 0;
     right: 0;
