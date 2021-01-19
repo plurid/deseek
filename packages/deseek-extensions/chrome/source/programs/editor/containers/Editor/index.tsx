@@ -19,6 +19,7 @@
     // #region internal
     import {
         StyledEditor,
+        StyledReplayer,
     } from './styled';
 
     import Tabs from './components/Tabs';
@@ -172,11 +173,7 @@ const Editor: React.FC<EditorProperties> = (
                 selectRecord={selectRecord}
             />
 
-            <div
-                style={{
-                    position: 'relative',
-                }}
-            >
+            <StyledReplayer>
                 <div
                     ref={replayerElement}
                 />
@@ -198,7 +195,7 @@ const Editor: React.FC<EditorProperties> = (
                     // #endregion methods
                 // #endregion required
                 />
-            </div>
+            </StyledReplayer>
         </StyledEditor>
     );
     // #endregion render

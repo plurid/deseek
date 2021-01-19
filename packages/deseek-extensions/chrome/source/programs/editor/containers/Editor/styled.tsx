@@ -15,7 +15,7 @@ export interface IStyledEditor {
     theme: Theme;
 }
 
-export const StyledEditor = styled.div`
+export const StyledEditor = styled.div<IStyledEditor>`
     background-color: ${
         ({
             theme,
@@ -41,8 +41,8 @@ export const StyledEditor = styled.div`
     };
 
     display: grid;
-    place-content: center;
-    padding: 2rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: 60px auto;
     height: 100%;
 
 
@@ -104,5 +104,12 @@ export const StyledEditor = styled.div`
         border: none;
         height: 700px;
     }
+`;
+
+
+export const StyledReplayer = styled.div`
+    position: relative;
+    display: grid;
+    place-content: center;
 `;
 // #endregion module
