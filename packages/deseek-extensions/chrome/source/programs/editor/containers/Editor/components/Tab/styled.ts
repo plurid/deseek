@@ -13,13 +13,21 @@
 // #region module
 export interface IStyledTab {
     theme: Theme;
+    selected: boolean;
 }
 
 export const StyledTab = styled.div<IStyledTab>`
     background-color: ${
         ({
             theme,
-        }: IStyledTab) => theme.backgroundColorTertiary
+            selected,
+        }: IStyledTab) => {
+            if (!selected) {
+                return theme.backgroundColorTertiary;
+            }
+
+            return theme.backgroundColorSecondary;
+        }
     };
     box-shadow: ${
         ({

@@ -28,6 +28,7 @@ export interface TabsProperties {
         // #region values
         theme: Theme;
         recorded: any;
+        selectedTab: any;
         // #endregion values
 
         // #region methods
@@ -47,6 +48,7 @@ const Tabs: React.FC<TabsProperties> = (
             // #region values
             theme,
             recorded,
+            selectedTab,
             // #endregion values
 
             // #region methods
@@ -79,6 +81,7 @@ const Tabs: React.FC<TabsProperties> = (
                         theme={theme}
                         data={record}
                         selectRecord={selectRecord}
+                        selected={selectedTab === id}
                     />
                 );
             })}

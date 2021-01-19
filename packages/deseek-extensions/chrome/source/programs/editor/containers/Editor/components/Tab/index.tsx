@@ -23,6 +23,7 @@ export interface TabProperties {
         // #region values
         theme: Theme;
         data: any;
+        selected: boolean;
         // #endregion values
 
         // #region methods
@@ -42,6 +43,7 @@ const Tab: React.FC<TabProperties> = (
             // #region values
             theme,
             data,
+            selected,
             // #endregion values
 
             // #region methods
@@ -61,8 +63,9 @@ const Tab: React.FC<TabProperties> = (
     // #region render
     return (
         <StyledTab
-            theme={theme}
             onClick={() => selectRecord(id)}
+            theme={theme}
+            selected={selected}
         >
             {title}
         </StyledTab>

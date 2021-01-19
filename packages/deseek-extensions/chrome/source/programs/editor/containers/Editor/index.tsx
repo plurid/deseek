@@ -52,6 +52,11 @@ const Editor: React.FC<EditorProperties> = (
 
     // #region state
     const [
+        selectedTab,
+        setSelectedTab,
+    ] = useState(null);
+
+    const [
         recorded,
         setRecorded,
     ] = useState(null);
@@ -116,10 +121,13 @@ const Editor: React.FC<EditorProperties> = (
             return;
         }
 
+        const index = recorded.records.findIndex((record: any) => record.id === id);
         const record = recorded.records.find((record: any) => record.id === id);
         if (!record) {
             return;
         }
+
+        setSelectedTab(index);
         setEvents(record.data);
     }
     // #endregion handlers
@@ -168,9 +176,17 @@ const Editor: React.FC<EditorProperties> = (
             theme={theme}
         >
             <Tabs
+            // #region required
+                // #region values
                 theme={theme}
                 recorded={recorded}
+                selectedTab={selectedTab}
+                // #endregion values
+
+                // #region methods
                 selectRecord={selectRecord}
+                // #endregion methods
+            // #endregion required
             />
 
             <StyledReplayer>
