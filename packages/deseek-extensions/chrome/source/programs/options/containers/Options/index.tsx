@@ -67,8 +67,11 @@ const extractOptions = (
 ) => {
     const split = value.split(/\s|\n/);
     const values = split
-        .map(value => value.trim().replace(/,/, 'g'))
-        .filter(value => value !== '');
+        .map(value =>
+            value.trim()
+                .replace(/,/, 'g')
+                .replace(/https?:\/\//, '')
+        ).filter(value => value !== '');
 
     return values;
 }
