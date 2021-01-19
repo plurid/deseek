@@ -16,6 +16,11 @@
     import {
         defaultOptions,
     } from '../../data/constants';
+
+    import {
+        ActiveData,
+        Options,
+    } from '../../data/interfaces';
     // #endregion external
 
 
@@ -33,7 +38,6 @@ let deseekFrameID: string | null;
 let focusedAt: number | null;
 
 
-
 const verifyActive = async () => {
     if (!chrome.storage.sync) {
         return;
@@ -47,27 +51,38 @@ const verifyActive = async () => {
     }
 
     const {
+        options,
+    } = await chromeStorage.get('options');
+
+    const host = location.host;
+    const optionsData: Options = options ?? defaultOptions;
+
+    for (const neverRecord of optionsData.neverRecordOn) {
+        if (host.includes(neverRecord)) {
+            return;
+        }
+    }
+
+    const {
         activeDeseeking,
     } = await chromeStorage.get('activeDeseeking');
     if (!activeDeseeking) {
         return;
     }
 
-    const {
-        options,
-    } = await chromeStorage.get('options');
-
-    return {
+    const data: ActiveData = {
         activeDeseeking,
-        options: options ?? defaultOptions,
+        options: optionsData,
     };
+
+    return data;
 }
 
 
 const contentscriptRender = async () => {
     try {
         const data = await verifyActive();
-        if (!data?.activeDeseeking) {
+        if (!data) {
             return;
         }
 
@@ -107,8 +122,8 @@ const startRecording = async (
         return;
     }
 
-    const activeDeseeking = await verifyActive();
-    if (!activeDeseeking) {
+    const data = await verifyActive();
+    if (!data) {
         return;
     }
 
