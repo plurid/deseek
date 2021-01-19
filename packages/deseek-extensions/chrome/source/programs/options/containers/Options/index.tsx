@@ -51,11 +51,13 @@
 const {
     form: {
         FormLeftRight: PluridFormLeftRight,
-        Formline: PluridFormline,
         Formitem: PluridFormitem,
     },
     typography: {
         Heading: PluridHeading,
+    },
+    inputs: {
+        InputBox: PluridInputBox,
     },
 } = universal;
 
@@ -79,6 +81,16 @@ const Options: React.FC<OptionsProperties> = () => {
         extensionOnOff,
         setExtensionOnOff,
     ] = useState(true);
+
+    const [
+        minimalFrame,
+        setMinimalFrame,
+    ] = useState(true);
+
+    const [
+        neverRecordOn,
+        setNeverRecordOn,
+    ] = useState('');
     // #endregion state
 
 
@@ -110,7 +122,12 @@ const Options: React.FC<OptionsProperties> = () => {
             }
 
             const {
+                minimalFrame,
+                neverRecordOn,
             } = options;
+
+            setMinimalFrame(minimalFrame ?? defaultOptions.minimalFrame);
+            setNeverRecordOn(neverRecordOn || defaultOptions.neverRecordOn);
         }
 
         setOptions();
@@ -119,6 +136,8 @@ const Options: React.FC<OptionsProperties> = () => {
     useEffect(() => {
         const saveOptions = async () => {
             const options = {
+                minimalFrame,
+                neverRecordOn,
             };
 
             await chromeStorage.set({options});
@@ -126,6 +145,8 @@ const Options: React.FC<OptionsProperties> = () => {
 
         saveOptions();
     }, [
+        minimalFrame,
+        neverRecordOn,
     ]);
     // #endregion effects
 
@@ -153,6 +174,16 @@ const Options: React.FC<OptionsProperties> = () => {
                             extensionOnOff={extensionOnOff}
                             setExtensionOnOff={() => setExtensionOnOff(!extensionOnOff)}
                         />
+
+                        <PluridFormitem>
+                            <PluridInputBox
+                                theme={theme}
+                                name="never record on"
+                                text={neverRecordOn}
+                                atChange={(event) => setNeverRecordOn(event.target.value)}
+                                // placeholder="e.g., plurid.com"
+                            />
+                        </PluridFormitem>
                     </StyledStateContainer>
 
 
@@ -184,6 +215,16 @@ const Options: React.FC<OptionsProperties> = () => {
                             />
                         </PluridFormLeftRight>
 
+                        <PluridFormitem
+                            theme={theme}
+                        >
+                            <ButtonCheckmark
+                                checked={minimalFrame}
+                                text="minimal frame (not recommended)"
+                                theme={theme}
+                                toggle={() => setMinimalFrame(mininal => !mininal)}
+                            />
+                        </PluridFormitem>
                     </StyledUIContainer>
 
                     <div

@@ -1,11 +1,16 @@
-import styled from 'styled-components';
+// #region imports
+    // #region libraries
+    import styled from 'styled-components';
 
-import {
-    universal,
-} from '@plurid/plurid-ui-components-react';
+    import {
+        universal,
+    } from '@plurid/plurid-ui-components-react';
+    // #endregion libraries
+// #endregion imports
 
 
 
+// #region module
 const {
     inputs: {
         Textline: PluridTextline,
@@ -75,3 +80,4 @@ export const StyledUIContainer = styled.div`
     margin-top: 50px;
     margin-bottom: 20px;
 `;
+// #endregion module
