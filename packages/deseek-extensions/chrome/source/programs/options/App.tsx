@@ -13,6 +13,10 @@
     import {
         defaultOptions,
     } from '../../data/constants';
+
+    import {
+        Options as IOptions,
+    } from '../../data/interfaces';
     // #endregion external
 
 
@@ -45,7 +49,7 @@ class App extends React.Component<any, any> {
 
         const selectedTheme = (themes as any)[theme];
 
-        const selectedOptions = {
+        const selectedOptions: IOptions = {
             minimalFrame: options?.minimalFrame ?? defaultOptions.minimalFrame,
             neverRecordOn: options?.neverRecordOn || defaultOptions.neverRecordOn,
         };

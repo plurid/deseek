@@ -53,14 +53,21 @@ const verifyActive = async () => {
         return;
     }
 
-    return activeDeseeking;
+    const {
+        options,
+    } = await chromeStorage.get('options');
+
+    return {
+        activeDeseeking,
+        options: options ?? defaultOptions,
+    };
 }
 
 
 const contentscriptRender = async () => {
     try {
-        const activeDeseeking = await verifyActive();
-        if (!activeDeseeking) {
+        const data = await verifyActive();
+        if (!data?.activeDeseeking) {
             return;
         }
 

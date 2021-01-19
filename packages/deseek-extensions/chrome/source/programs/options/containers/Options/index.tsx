@@ -62,6 +62,18 @@ const {
 } = universal;
 
 
+const extractOptions = (
+    value: string,
+) => {
+    const split = value.split(/\s|\n/);
+    const values = split
+        .map(value => value.trim().replace(/,/, 'g'))
+        .filter(value => value !== '');
+
+    return values;
+}
+
+
 export interface OptionsProperties {
 }
 
@@ -85,12 +97,12 @@ const Options: React.FC<OptionsProperties> = () => {
     const [
         minimalFrame,
         setMinimalFrame,
-    ] = useState(true);
+    ] = useState<boolean>(options.minimalFrame);
 
     const [
         neverRecordOn,
         setNeverRecordOn,
-    ] = useState('');
+    ] = useState(options.neverRecordOn.join('\n'));
     // #endregion state
 
 
@@ -137,7 +149,7 @@ const Options: React.FC<OptionsProperties> = () => {
         const saveOptions = async () => {
             const options = {
                 minimalFrame,
-                neverRecordOn,
+                neverRecordOn: extractOptions(neverRecordOn),
             };
 
             await chromeStorage.set({options});
