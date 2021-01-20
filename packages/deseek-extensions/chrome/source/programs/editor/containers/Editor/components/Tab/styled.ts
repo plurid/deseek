@@ -23,10 +23,10 @@ export const StyledTab = styled.div<IStyledTab>`
             selected,
         }: IStyledTab) => {
             if (!selected) {
-                return theme.backgroundColorTertiary;
+                return theme.backgroundColorSecondary;
             }
 
-            return theme.backgroundColorSecondary;
+            return theme.backgroundColorTertiary;
         }
     };
     box-shadow: ${

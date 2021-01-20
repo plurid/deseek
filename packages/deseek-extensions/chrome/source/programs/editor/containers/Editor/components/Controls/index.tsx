@@ -148,9 +148,9 @@ const Controls: React.FC<ControlsProperties> = (
                     }}
                 >
                     <PluridPureButton
-                        text="finish"
+                        text="Finish"
                         atClick={() => finish()}
-                        level={2}
+                        level={1}
                     />
                 </div>
             </StyledControlsButtons>
