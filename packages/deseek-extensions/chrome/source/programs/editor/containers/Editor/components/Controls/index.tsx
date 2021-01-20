@@ -8,6 +8,11 @@
     import {
         Theme,
     } from '@plurid/plurid-themes';
+
+    import {
+        PluridIconPlay,
+        PluridIconPause,
+    } from '@plurid/plurid-icons-react';
     // #endregion libraries
 
 
@@ -21,6 +26,8 @@
     // #region internal
     import {
         StyledControls,
+        StyledControlsTime,
+        StyledControlsButtons,
     } from './styled';
     // #endregion internal
 // #region imports
@@ -100,25 +107,53 @@ const Controls: React.FC<ControlsProperties> = (
 
 
     // #region render
+    if (events.length < 2) {
+        return (
+            <></>
+        );
+    }
+
     return (
         <StyledControls
             theme={theme}
         >
-            {events.length > 2 && (
-                <>
-                    <PluridPureButton
-                        text={playing ? 'pause' : 'play'}
-                        atClick={() => playing ? pause() : play()}
-                        level={2}
-                    />
+            <StyledControlsTime
+                theme={theme}
+            />
 
+            <StyledControlsButtons>
+                <div
+                    style={{
+                        display: 'grid',
+                        placeContent: 'center',
+                    }}
+                >
+                    {playing ? (
+                        <PluridIconPause
+                            atClick={pause}
+                        />
+                    ) : (
+                        <PluridIconPlay
+                            atClick={play}
+                        />
+                    )}
+                </div>
+
+                <div />
+
+                <div
+                    style={{
+                        display: 'grid',
+                        placeContent: 'center',
+                    }}
+                >
                     <PluridPureButton
                         text="finish"
                         atClick={() => finish()}
                         level={2}
                     />
-                </>
-            )}
+                </div>
+            </StyledControlsButtons>
         </StyledControls>
     );
     // #endregion render
