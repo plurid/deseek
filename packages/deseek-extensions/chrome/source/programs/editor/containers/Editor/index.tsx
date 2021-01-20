@@ -146,6 +146,7 @@ const Editor: React.FC<EditorProperties> = (
 
         replayer.current = new rrweb.Replayer(events as any, {
             root: replayerElement.current,
+            showWarning: false,
         });
     }, [
         events,
@@ -162,7 +163,11 @@ const Editor: React.FC<EditorProperties> = (
             (
                 message,
             ) => {
-                setRecorded(message.recorded);
+                const recorded = {
+                    ...message.recorded,
+                    records: message.recorded.records.filter((record: any) => record.data.length > 2),
+                };
+                setRecorded(recorded);
             },
         );
     }, []);
@@ -197,6 +202,7 @@ const Editor: React.FC<EditorProperties> = (
                 // #region required
                     // #region values
                     theme={theme}
+                    recorded={recorded}
                     events={events}
                     playing={playing}
                     // #endregion values

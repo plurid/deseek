@@ -36,10 +36,33 @@
 
 
 // #region module
+const summedTime = (
+    recorded: any,
+) => {
+    if (!recorded) {
+        return;
+    }
+
+    let time = 0;
+
+    recorded.records.map((record: any) => {
+        let recordTime = 0;
+
+        record.data.map((view: any) => {
+            recordTime += view.delay;
+        });
+
+        time += recordTime;
+    });
+
+    return time;
+}
+
 export interface ControlsProperties {
     // #region required
         // #region values
         theme: Theme;
+        recorded: any;
         events: any[];
         playing: boolean;
         // #endregion values
@@ -62,6 +85,7 @@ const Controls: React.FC<ControlsProperties> = (
         // #region required
             // #region values
             theme,
+            recorded,
             events,
             playing,
             // #endregion values
@@ -75,6 +99,9 @@ const Controls: React.FC<ControlsProperties> = (
             // #endregion methods
         // #endregion required
     } = properties;
+
+    const duration = summedTime(recorded);
+    console.log('duration', duration);
     // #endregion properties
 
 
@@ -105,6 +132,8 @@ const Controls: React.FC<ControlsProperties> = (
         playing,
     ])
     // #endregion effects
+
+    console.log('recorded', recorded);
 
 
     // #region render
