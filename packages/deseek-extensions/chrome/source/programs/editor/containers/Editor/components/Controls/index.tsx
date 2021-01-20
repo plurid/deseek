@@ -27,6 +27,7 @@
     import {
         StyledControls,
         StyledControlsTime,
+        StyledControlsTimePlayed,
         StyledControlsButtons,
     } from './styled';
     // #endregion internal
@@ -119,7 +120,14 @@ const Controls: React.FC<ControlsProperties> = (
         >
             <StyledControlsTime
                 theme={theme}
-            />
+            >
+                <StyledControlsTimePlayed
+                    theme={theme}
+                    style={{
+                        width: '15%',
+                    }}
+                />
+            </StyledControlsTime>
 
             <StyledControlsButtons>
                 <div

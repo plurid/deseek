@@ -31,9 +31,23 @@ export interface IStyledControlsTime {
 
 export const StyledControlsTime = styled.div<IStyledControlsTime>`
     width: 100%;
-    height: 20px;
+    height: 1rem;
     background: hsla(220, 10%, 10%, 0.5);
     cursor: pointer;
+    position: relative;
+`;
+
+
+export interface IStyledControlsTimePlayed {
+    theme: Theme;
+}
+
+export const StyledControlsTimePlayed = styled.div<IStyledControlsTimePlayed>`
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background-color: white;
 `;
 
 
