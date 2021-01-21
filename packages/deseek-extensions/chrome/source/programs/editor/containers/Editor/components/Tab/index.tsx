@@ -1,16 +1,23 @@
 // #region imports
     // #region libraries
-    import React from 'react';
+    import React, {
+        useState,
+    } from 'react';
 
     import {
         Theme,
     } from '@plurid/plurid-themes';
+
+    import {
+        PluridIconFrame,
+    } from '@plurid/plurid-icons-react';
     // #endregion libraries
 
 
     // #region internal
     import {
         StyledTab,
+        StyledTabTitle,
     } from './styled';
     // #endregion internal
 // #region imports
@@ -60,14 +67,32 @@ const Tab: React.FC<TabProperties> = (
     // #endregion properties
 
 
+    // #region state
+    const [
+        mouseOver,
+        setMouseOver,
+    ] = useState(false);
+    // #endregion state
+
+
     // #region render
     return (
         <StyledTab
-            onClick={() => selectRecord(index)}
             theme={theme}
             selected={selected}
+            onMouseEnter={() => setMouseOver(true)}
+            onMouseLeave={() => setMouseOver(false)}
         >
-            {title}
+            <StyledTabTitle
+               onClick={() => selectRecord(index)}
+               theme={theme}
+            >
+                {title}
+            </StyledTabTitle>
+
+            {mouseOver && (
+                <PluridIconFrame />
+            )}
         </StyledTab>
     );
     // #endregion render

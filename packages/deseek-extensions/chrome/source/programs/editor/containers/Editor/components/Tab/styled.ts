@@ -36,16 +36,27 @@ export const StyledTab = styled.div<IStyledTab>`
     };
 
 
+    position: relative;
     width: 150px;
     height: 30px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 128px 16px;
+    grid-gap: 0.5rem;
+    text-align: left;
     align-items: center;
     padding: 0 0.7rem;
     margin-right: 0.7rem;
     border-radius: 20px;
     user-select: none;
-    cursor: pointer;
+`;
 
+
+export interface IStyledTabTitle {
+    theme: Theme;
+}
+
+export const StyledTabTitle = styled.div<IStyledTabTitle>`
+    cursor: pointer;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
