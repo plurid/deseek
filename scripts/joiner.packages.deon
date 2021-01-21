@@ -9,5 +9,6 @@ import base from https://raw.githubusercontent.com/plurid/joiner/master/packages
 
 
 packages [
+    ./packages/deseek-extensions/chrome
     ./packages/deseek-server
 ]
