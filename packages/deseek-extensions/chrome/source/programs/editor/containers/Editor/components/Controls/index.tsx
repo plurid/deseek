@@ -68,10 +68,11 @@ export interface ControlsProperties {
         // #endregion values
 
         // #region methods
-        play: any;
-        pause: any;
+        play: () => void;
+        pause: () => void;
         getCurrentTime: any;
         getMetadata: any;
+        interact: () => void;
         finish: any;
         // #endregion methods
     // #endregion required

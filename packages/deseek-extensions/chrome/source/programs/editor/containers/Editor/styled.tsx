@@ -110,6 +110,6 @@ export const StyledEditor = styled.div<IStyledEditor>`
 export const StyledReplayer = styled.div`
     position: relative;
     display: grid;
-    place-content: center;
+    justify-content: center;
 `;
 // #endregion module

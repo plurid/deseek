@@ -114,6 +114,14 @@ const Editor: React.FC<EditorProperties> = (
         setPlaying(false);
     }
 
+    const interact = () => {
+        if (!replayer.current) {
+            return;
+        }
+
+        replayer.current.enableInteract();
+    }
+
     const selectRecord = (
         index: number,
     ) => {
@@ -146,11 +154,14 @@ const Editor: React.FC<EditorProperties> = (
             return;
         }
 
-        // replayerElement.current.innerHTML = "";
-
         replayer.current = new rrweb.Replayer(events as any, {
             root: replayerElement.current,
             showWarning: false,
+        });
+
+        (replayer.current as any).handleResize({
+            width: 800,
+            height: 500,
         });
     }, [
         events,
@@ -216,6 +227,7 @@ const Editor: React.FC<EditorProperties> = (
                     pause={pause}
                     getCurrentTime={getCurrentTime}
                     getMetadata={getMetadata}
+                    interact={interact}
                     finish={finish}
                     // #endregion methods
                 // #endregion required
