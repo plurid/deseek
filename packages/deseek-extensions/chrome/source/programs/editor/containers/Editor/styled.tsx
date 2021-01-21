@@ -102,7 +102,7 @@ export const StyledEditor = styled.div<IStyledEditor>`
 
     iframe {
         border: none;
-        height: 700px;
+        /* height: 700px; */
     }
 `;
 
@@ -111,5 +111,6 @@ export const StyledReplayer = styled.div`
     position: relative;
     display: grid;
     justify-content: center;
+    grid-template-rows: 500px;
 `;
 // #endregion module

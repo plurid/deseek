@@ -159,10 +159,15 @@ const Editor: React.FC<EditorProperties> = (
             showWarning: false,
         });
 
-        (replayer.current as any).handleResize({
-            width: 800,
-            height: 500,
-        });
+        // replayer.current.addEvent(rrweb.ReplayerEvents.Resize);
+        // replayer.current.service.send(rrweb.ReplayerEvents.Resize, {
+
+        // };
+
+        // (replayer.current as any).handleResize({
+        //     width: 800,
+        //     height: 500,
+        // });
     }, [
         events,
     ]);
@@ -210,6 +215,9 @@ const Editor: React.FC<EditorProperties> = (
 
             <StyledReplayer>
                 <div
+                    style={{
+                        transform: 'scale(.8) translateY(-50px)',
+                    }}
                     ref={replayerElement}
                 />
 
