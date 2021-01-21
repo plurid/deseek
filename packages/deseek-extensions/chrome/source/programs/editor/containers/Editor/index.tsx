@@ -122,6 +122,16 @@ const Editor: React.FC<EditorProperties> = (
         replayer.current.enableInteract();
     }
 
+    const setTime = (
+        value: number,
+    ) => {
+        if (!replayer.current) {
+            return;
+        }
+
+        replayer.current.play(value);
+    }
+
     const selectRecord = (
         index: number,
     ) => {
@@ -236,6 +246,7 @@ const Editor: React.FC<EditorProperties> = (
                     getCurrentTime={getCurrentTime}
                     getMetadata={getMetadata}
                     interact={interact}
+                    setTime={setTime}
                     finish={finish}
                     // #endregion methods
                 // #endregion required
