@@ -128,6 +128,10 @@ const Editor: React.FC<EditorProperties> = (
 
         setSelectedTab(index);
         setEvents(record.data);
+
+        if (replayerElement.current) {
+            replayerElement.current.innerHTML = "";
+        }
     }
     // #endregion handlers
 
