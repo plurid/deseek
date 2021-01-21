@@ -54,7 +54,7 @@ export const StyledControlsTimePlayed = styled.div<IStyledControlsTimePlayed>`
 
 export const StyledControlsButtons = styled.div`
     display: grid;
-    grid-template-columns: 50px auto 200px;
+    grid-template-columns: 50px 50px auto 200px;
     align-items: center;
     height: 70px;
 `;

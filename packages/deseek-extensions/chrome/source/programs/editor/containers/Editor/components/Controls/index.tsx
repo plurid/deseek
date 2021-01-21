@@ -12,6 +12,7 @@
     import {
         PluridIconPlay,
         PluridIconPause,
+        PluridIconFontSize,
     } from '@plurid/plurid-icons-react';
     // #endregion libraries
 
@@ -67,6 +68,7 @@ export interface ControlsProperties {
         recorded: any;
         events: any[];
         playing: boolean;
+        interacting: boolean;
         // #endregion values
 
         // #region methods
@@ -94,6 +96,7 @@ const Controls: React.FC<ControlsProperties> = (
             recorded,
             events,
             playing,
+            interacting,
             // #endregion values
 
             // #region methods
@@ -207,12 +210,29 @@ const Controls: React.FC<ControlsProperties> = (
                     {playing ? (
                         <PluridIconPause
                             atClick={pause}
+                            title="pause"
                         />
                     ) : (
                         <PluridIconPlay
                             atClick={play}
+                            title="play"
                         />
                     )}
+                </div>
+
+                <div
+                    style={{
+                        display: 'grid',
+                        placeContent: 'center',
+                        height: '30px',
+                        background: interacting ? 'red' : '',
+                        borderRadius: '20px',
+                    }}
+                >
+                    <PluridIconFontSize
+                        atClick={interact}
+                        title="interact"
+                    />
                 </div>
 
                 <div />

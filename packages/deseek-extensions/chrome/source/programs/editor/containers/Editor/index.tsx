@@ -70,6 +70,11 @@ const Editor: React.FC<EditorProperties> = (
         playing,
         setPlaying,
     ] = useState(false);
+
+    const [
+        interacting,
+        setInteracting,
+    ] = useState(false);
     // #endregion state
 
 
@@ -119,7 +124,13 @@ const Editor: React.FC<EditorProperties> = (
             return;
         }
 
-        replayer.current.enableInteract();
+        if (interacting) {
+            replayer.current.disableInteract();
+            setInteracting(false);
+        } else {
+            replayer.current.enableInteract();
+            setInteracting(true);
+        }
     }
 
     const setTime = (
@@ -238,6 +249,7 @@ const Editor: React.FC<EditorProperties> = (
                     recorded={recorded}
                     events={events}
                     playing={playing}
+                    interacting={interacting}
                     // #endregion values
 
                     // #region methods
