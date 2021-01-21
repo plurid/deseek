@@ -225,7 +225,7 @@ const Controls: React.FC<ControlsProperties> = (
                         display: 'grid',
                         placeContent: 'center',
                         height: '30px',
-                        background: interacting ? 'red' : '',
+                        background: interacting ? theme.backgroundColorTertiary : '',
                         borderRadius: '20px',
                     }}
                 >

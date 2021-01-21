@@ -155,6 +155,10 @@ const Editor: React.FC<EditorProperties> = (
             return;
         }
 
+        if (selectedTab === index) {
+            return;
+        }
+
         setSelectedTab(index);
         setEvents(record.data);
 
