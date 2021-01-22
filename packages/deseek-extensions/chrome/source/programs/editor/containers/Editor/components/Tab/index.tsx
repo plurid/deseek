@@ -2,6 +2,7 @@
     // #region libraries
     import React, {
         useState,
+        useEffect,
     } from 'react';
 
     import {
@@ -18,6 +19,7 @@
     import {
         StyledTab,
         StyledTabTitle,
+        StyledTabData,
     } from './styled';
     // #endregion internal
 // #region imports
@@ -62,6 +64,7 @@ const Tab: React.FC<TabProperties> = (
     } = properties;
 
     const {
+        url,
         title,
     } = data;
     // #endregion properties
@@ -72,7 +75,25 @@ const Tab: React.FC<TabProperties> = (
         mouseOver,
         setMouseOver,
     ] = useState(false);
+
+    const [
+        showTabData,
+        setShowTabData,
+    ] = useState(false);
     // #endregion state
+
+
+    // #region effects
+    useEffect(() => {
+        if (mouseOver) {
+            setShowTabData(true);
+        } else {
+            setShowTabData(false);
+        }
+    }, [
+        mouseOver,
+    ]);
+    // #endregion effects
 
 
     // #region render
@@ -92,6 +113,15 @@ const Tab: React.FC<TabProperties> = (
 
             {mouseOver && (
                 <PluridIconFrame />
+            )}
+
+            {showTabData && (
+                <StyledTabData
+                    theme={theme}
+                    selected={selected}
+                >
+                    {url}
+                </StyledTabData>
             )}
         </StyledTab>
     );
