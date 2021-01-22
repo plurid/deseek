@@ -21,5 +21,9 @@ export const StyledTabs = styled.div<IStyledTabs>`
     height: 60px;
     padding: 0 0.7rem;
     overflow: scroll;
+
+    /* HACK: overflow issue */
+    padding-bottom: 100px;
+    margin-bottom: -100px;
 `;
 // #region module
